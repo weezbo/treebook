@@ -17,6 +17,11 @@ class CustomRoutesTest < ActionDispatch::IntegrationTest
 		assert_response :success
 	end
 
+	test "that a profile page works" do 
+		get '/maxmuir'
+		assert_response :success
+	end
+
   # test "the truth" do
   #   assert true
   # end

@@ -8,3 +8,8 @@ two:
   
   content: MyText
   user: max
+
+three:
+ 
+  content: "Hi, I'm Jim"
+  user: jim
