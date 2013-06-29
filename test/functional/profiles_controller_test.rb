@@ -22,7 +22,6 @@ class ProfilesControllerTest < ActionController::TestCase
   	get :show, id: users(:max).profile_name
   	assigns(:statuses).each do |status|
   		assert_equal users(:max), status.user
-  end
-
- end
+  	end
+	end
 end 
