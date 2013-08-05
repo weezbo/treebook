@@ -35,13 +35,13 @@ class StatusesController < ApplicationController
 
   # GET /statuses/1/edit
   def edit
-    @status = Status.find(params[:id])
+    @status = current_user.statuses.find(params[:id])
   end
 
   # POST /statuses
   # POST /statuses.json
   def create
-    @status = Status.new(params[:status])
+    @status = current_user.statuses.new(params[:status])
 
     respond_to do |format|
       if @status.save
@@ -57,8 +57,10 @@ class StatusesController < ApplicationController
   # PUT /statuses/1
   # PUT /statuses/1.json
   def update
-    @status = Status.find(params[:id])
-
+    @status = current_user.statuses.find(params[:id])
+    if params[:status] && params[:status].has_key?(:user_id)
+        params[:status].delete(:user_id)
+    end
     respond_to do |format|
       if @status.update_attributes(params[:status])
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
@@ -73,7 +75,7 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
-    @status = Status.find(params[:id])
+    @status = current_user.statuses.find(params[:id])
     @status.destroy
 
     respond_to do |format|
